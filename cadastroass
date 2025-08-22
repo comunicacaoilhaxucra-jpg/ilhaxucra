@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Cadastral de Associado</title>
+    <!-- Inclui Tailwind CSS para um estilo responsivo e moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para mensagens de erro */
+        .error-message {
+            color: #ef4444; /* tailwind red-500 */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem; /* mt-1 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-xl max-w-2xl w-full">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Ficha Cadastral de Associado</h1>
+        <p class="text-gray-600 text-center mb-8">Preencha seus dados para se tornar um associado do Grupo de Arte e Cultura Ilha Xucra.</p>
+
+        <form id="associadoForm" class="space-y-6">
+            <!-- Seção de Dados Pessoais -->
+            <fieldset class="border border-gray-300 rounded-md p-4 sm:p-6">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Dados Pessoais</legend>
+
+                <div>
+                    <label for="nomeCompleto" class="block text-sm font-medium text-gray-700">Nome Completo <span class="text-red-500">*</span></label>
+                    <input type="text" id="nomeCompleto" name="nomeCompleto" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="apelido" class="block text-sm font-medium text-gray-700">Apelido</label>
+                    <input type="text" id="apelido" name="apelido"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="filiacao" class="block text-sm font-medium text-gray-700">Filiação <span class="text-red-500">*</span></label>
+                    <input type="text" id="filiacao" name="filiacao" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="localNascimento" class="block text-sm font-medium text-gray-700">Local de Nascimento <span class="text-red-500">*</span></label>
+                    <input type="text" id="localNascimento" name="localNascimento" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="dataNascimento" class="block text-sm font-medium text-gray-700">Data de Nascimento <span class="text-red-500">*</span></label>
+                    <input type="date" id="dataNascimento" name="dataNascimento" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="cpf" class="block text-sm font-medium text-gray-700">CPF <span class="text-red-500">*</span></label>
+                    <input type="text" id="cpf" name="cpf" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <p id="cpfError" class="error-message hidden">CPF inválido. Por favor, use o formato 000.000.000-00 e um número válido.</p>
+                </div>
+
+                <div>
+                    <label for="estadoCivil" class="block text-sm font-medium text-gray-700">Estado Civil <span class="text-red-500">*</span></label>
+                    <select id="estadoCivil" name="estadoCivil" required
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">Selecione...</option>
+                        <option value="solteiro">Solteiro(a)</option>
+                        <option value="casado">Casado(a)</option>
+                        <option value="divorciado">Divorciado(a)</option>
+                        <option value="viuvo">Viúvo(a)</option>
+                        <option value="uniaoEstavel">União Estável</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="endereco" class="block text-sm font-medium text-gray-700">Endereço Completo <span class="text-red-500">*</span></label>
+                    <input type="text" id="endereco" name="endereco" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="bairro" class="block text-sm font-medium text-gray-700">Bairro <span class="text-red-500">*</span></label>
+                    <input type="text" id="bairro" name="bairro" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="cep" class="block text-sm font-medium text-gray-700">CEP <span class="text-red-500">*</span></label>
+                    <input type="text" id="cep" name="cep" required pattern="\d{5}-\d{3}" placeholder="00000-000"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="cidade" class="block text-sm font-medium text-gray-700">Cidade <span class="text-red-500">*</span></label>
+                    <input type="text" id="cidade" name="cidade" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone <span class="text-red-500">*</span></label>
+                    <input type="tel" id="telefone" name="telefone" required pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" placeholder="(00) 90000-0000"
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </fieldset>
+
+            <!-- Seção de Cadastro de Associado Menor (Opcional, com lógica de exibição) -->
+            <fieldset class="border border-gray-300 rounded-md p-4 sm:p-6">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Cadastro de Associado Menor</legend>
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" id="isMenor" name="isMenor" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <label for="isMenor" class="ml-2 block text-sm text-gray-900">O associado é menor de idade?</label>
+                </div>
+
+                <div id="secaoMenor" class="space-y-6 hidden">
+                    <div>
+                        <label for="responsavelFinanceiro" class="block text-sm font-medium text-gray-700">Responsável Financeiro <span class="text-red-500">*</span></label>
+                        <input type="text" id="responsavelFinanceiro" name="responsavelFinanceiro"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="cpfResponsavel" class="block text-sm font-medium text-gray-700">CPF do Responsável <span class="text-red-500">*</span></label>
+                        <input type="text" id="cpfResponsavel" name="cpfResponsavel" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <p id="cpfResponsavelError" class="error-message hidden">CPF do Responsável inválido. Por favor, use o formato 000.000.000-00 e um número válido.</p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Seção de Necessidades Específicas -->
+            <fieldset class="border border-gray-300 rounded-md p-4 sm:p-6">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Necessidades Específicas</legend>
+                <div>
+                    <label for="necessidadesEspecificas" class="block text-sm font-medium text-gray-700">Descreva quaisquer necessidades específicas:</label>
+                    <textarea id="necessidadesEspecificas" name="necessidadesEspecificas" rows="3"
+                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Seção de Atividades de Interesse e Categoria de Associado -->
+            <fieldset class="border border-gray-300 rounded-md p-4 sm:p-6">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Atividades de Interesse e Categoria</legend>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Qual sua categoria de Associado? <span class="text-red-500">*</span></label>
+                    <div class="mt-2 space-y-2">
+                        <div class="flex items-center">
+                            <input id="catPatrimonial" name="categoriaAssociado" type="radio" value="patrimonial" required
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="catPatrimonial" class="ml-3 block text-sm font-medium text-gray-700">Associado Patrimonial</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="catRemido" name="categoriaAssociado" type="radio" value="remido"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="catRemido" class="ml-3 block text-sm font-medium text-gray-700">Associado Remido</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="catHonra" name="categoriaAssociado" type="radio" value="honra"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="catHonra" class="ml-3 block text-sm font-medium text-gray-700">Associado de Honra</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="catConviva" name="categoriaAssociado" type="radio" value="conviva"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="catConviva" class="ml-3 block text-sm font-medium text-gray-700">Associado Conviva</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Categoria <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div class="flex items-center">
+                            <input id="idadePreMirim" name="categoriaIdade" type="radio" value="preMirim" required
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadePreMirim" class="ml-3 block text-sm font-medium text-gray-700">Pré-Mirim</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeMirim" name="categoriaIdade" type="radio" value="mirim"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeMirim" class="ml-3 block text-sm font-medium text-gray-700">Mirim</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeJuvenil" name="categoriaIdade" type="radio" value="juvenil"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeJuvenil" class="ml-3 block text-sm font-medium text-gray-700">Juvenil</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeAdulto" name="categoriaIdade" type="radio" value="adulto"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeAdulto" class="ml-3 block text-sm font-medium text-gray-700">Adulto</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeVeterano" name="categoriaIdade" type="radio" value="veterano"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeVeterano" class="ml-3 block text-sm font-medium text-gray-700">Veterano</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeXiru" name="categoriaIdade" type="radio" value="xiru"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeXiru" class="ml-3 block text-sm font-medium text-gray-700">Xiru</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="idadeVaqueanos" name="categoriaIdade" type="radio" value="vaqueanosFiscal"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="idadeVaqueanos" class="ml-3 block text-sm font-medium text-gray-700">Vaqueanos/Fiscal</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Atividades de Interesse <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div class="flex items-center">
+                            <input id="intDancasTrad" name="atividadesInteresse" type="checkbox" value="dancasTradicionais"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intDancasTrad" class="ml-3 block text-sm font-medium text-gray-700">Danças Tradicionais</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intDancaSalao" name="atividadesInteresse" type="checkbox" value="dancaSalao"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intDancaSalao" class="ml-3 block text-sm font-medium text-gray-700">Dança de Salão</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intCanto" name="atividadesInteresse" type="checkbox" value="canto"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intCanto" class="ml-3 block text-sm font-medium text-gray-700">Canto</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intDeclamacao" name="atividadesInteresse" type="checkbox" value="declamacao"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intDeclamacao" class="ml-3 block text-sm font-medium text-gray-700">Declamação</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intChula" name="atividadesInteresse" type="checkbox" value="chula"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intChula" class="ml-3 block text-sm font-medium text-gray-700">Chula</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intInstrumentos" name="atividadesInteresse" type="checkbox" value="instrumentosMusicais"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intInstrumentos" class="ml-3 block text-sm font-medium text-gray-700">Instrumentos Musicais</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intEventos" name="atividadesInteresse" type="checkbox" value="eventos"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intEventos" class="ml-3 block text-sm font-medium text-gray-700">Eventos</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="intOutro" name="atividadesInteresse" type="checkbox" value="outro"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <label for="intOutro" class="ml-3 block text-sm font-medium text-gray-700">Outro:</label>
+                            <input type="text" id="outroAtividade" name="outroAtividade" class="ml-2 px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm flex-grow">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Seção de Autorizações -->
+            <fieldset class="border border-gray-300 rounded-md p-4 sm:p-6">
+                <legend class="text-xl font-semibold text-gray-700 px-2">Autorizações</legend>
+                <p class="text-sm text-gray-600 mb-4">Declaro que li, entendi e concordo com a utilização pelo Grupo de Arte e Cultura Ilha Xucra dos meus dados pessoais, assim como do menor por mim representado, conforme consta na parte introdutória desta ficha/formulário, bem como a utilização de imagens fotográficas ou de vídeo na divulgação pública de eventos, apresentações ou outras atividades.</p>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Autorizo o uso dos meus dados conforme a LGPD (Lei nº 13.709/2018). <span class="text-red-500">*</span></label>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <input id="lgpdSim" name="autorizaLgpd" type="radio" value="sim" required
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="lgpdSim" class="ml-2 block text-sm font-medium text-gray-700">Autorizo</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="lgpdNao" name="autorizaLgpd" type="radio" value="nao"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="lgpdNao" class="ml-2 block text-sm font-medium text-gray-700">Não Autorizo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Autorizo o uso da minha imagem em mídias sociais e institucionais. <span class="text-red-500">*</span></label>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <input id="imagemSim" name="autorizaImagem" type="radio" value="sim" required
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="imagemSim" class="ml-2 block text-sm font-medium text-gray-700">Autorizo</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="imagemNao" name="autorizaImagem" type="radio" value="nao"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                            <label for="imagemNao" class="ml-2 block text-sm font-medium text-gray-700">Não Autorizo</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="text-center mt-8">
+                <button type="submit"
+                        class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Enviar Ficha Cadastral
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Função para validar CPF no lado do cliente (melhora UX, não substitui validação server-side)
+        function isValidCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+            if (cpf == '') return false;
+            // Elimina CPFs invalidos conhecidos
+            if (cpf.length != 11 ||
+                cpf == "00000000000" ||
+                cpf == "11111111111" ||
+                cpf == "22222222222" ||
+                cpf == "33333333333" ||
+                cpf == "44444444444" ||
+                cpf == "55555555555" ||
+                cpf == "66666666666" ||
+                cpf == "77777777777" ||
+                cpf == "88888888888" ||
+                cpf == "99999999999")
+                return false;
+            // Valida 1o digito
+            let add = 0;
+            for (let i = 0; i < 9; i++)
+                add += parseInt(cpf.charAt(i)) * (10 - i);
+            let rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11)
+                rev = 0;
+            if (rev != parseInt(cpf.charAt(9)))
+                return false;
+            // Valida 2o digito
+            add = 0;
+            for (let i = 0; i < 10; i++)
+                add += parseInt(cpf.charAt(i)) * (11 - i);
+            rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11)
+                rev = 0;
+            if (rev != parseInt(cpf.charAt(10)))
+                return false;
+            return true;
+        }
+
+        // Função para formatar CPF e adicionar validação
+        function setupCpfValidation(cpfInputId, errorMsgId) {
+            const cpfInput = document.getElementById(cpfInputId);
+            const errorMsg = document.getElementById(errorMsgId);
+
+            cpfInput.addEventListener('input', function(event) {
+                let value = event.target.value;
+                // Remove tudo que não é dígito
+                value = value.replace(/\D/g, '');
+                // Limita a 11 dígitos
+                value = value.substring(0, 11);
+
+                // Formata o CPF
+                if (value.length > 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+                } else if (value.length > 6) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{3})$/, '$1.$2.$3');
+                } else if (value.length > 3) {
+                    value = value.replace(/^(\d{3})(\d{3})$/, '$1.$2');
+                } else if (value.length > 0) {
+                    value = value.replace(/^(\d{3})$/, '$1');
+                }
+                event.target.value = value;
+            });
+
+            cpfInput.addEventListener('blur', function() {
+                if (cpfInput.value && !isValidCPF(cpfInput.value)) {
+                    errorMsg.classList.remove('hidden');
+                    cpfInput.classList.add('border-red-500');
+                } else {
+                    errorMsg.classList.add('hidden');
+                    cpfInput.classList.remove('border-red-500');
+                }
+            });
+        }
+
+        // Adiciona a validação do CPF principal
+        setupCpfValidation('cpf', 'cpfError');
+        // Adiciona a validação do CPF do responsável
+        setupCpfValidation('cpfResponsavel', 'cpfResponsavelError');
+
+
+        // Lógica para mostrar/esconder a seção de associado menor
+        const isMenorCheckbox = document.getElementById('isMenor');
+        const secaoMenor = document.getElementById('secaoMenor');
+        const responsavelFinanceiroInput = document.getElementById('responsavelFinanceiro');
+        const cpfResponsavelInput = document.getElementById('cpfResponsavel');
+
+        isMenorCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                secaoMenor.classList.remove('hidden');
+                responsavelFinanceiroInput.setAttribute('required', 'true');
+                cpfResponsavelInput.setAttribute('required', 'true');
+            } else {
+                secaoMenor.classList.add('hidden');
+                responsavelFinanceiroInput.removeAttribute('required');
+                cpfResponsavelInput.removeAttribute('required');
+                // Limpa os campos quando a seção é escondida
+                responsavelFinanceiroInput.value = '';
+                cpfResponsavelInput.value = '';
+                document.getElementById('cpfResponsavelError').classList.add('hidden');
+                cpfResponsavelInput.classList.remove('border-red-500');
+            }
+        });
+
+        // Lógica para "Outro" na Atividades de Interesse
+        const intOutroCheckbox = document.getElementById('intOutro');
+        const outroAtividadeInput = document.getElementById('outroAtividade');
+
+        intOutroCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                outroAtividadeInput.removeAttribute('disabled');
+                outroAtividadeInput.setAttribute('required', 'true');
+            } else {
+                outroAtividadeInput.setAttribute('disabled', 'true');
+                outroAtividadeInput.removeAttribute('required');
+                outroAtividadeInput.value = ''; // Limpa o campo quando desmarcado
+            }
+        });
+        // Inicializa o campo "Outro" como desabilitado se não estiver marcado
+        if (!intOutroCheckbox.checked) {
+            outroAtividadeInput.setAttribute('disabled', 'true');
+        }
+
+        // Lógica para formatação de telefone
+        const telefoneInput = document.getElementById('telefone');
+        telefoneInput.addEventListener('input', function(event) {
+            let value = event.target.value;
+            value = value.replace(/\D/g, ''); // Remove tudo que não é dígito
+            value = value.substring(0, 11); // Limita a 11 dígitos
+
+            if (value.length > 10) {
+                value = value.replace(/^(\d\d)(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d\d)(\d{0,5}).*/, '($1) $2');
+            } else {
+                value = value.replace(/^(\d*)/, '($1');
+            }
+            event.target.value = value;
+        });
+
+        // Lógica para formatação de CEP
+        const cepInput = document.getElementById('cep');
+        cepInput.addEventListener('input', function(event) {
+            let value = event.target.value;
+            value = value.replace(/\D/g, ''); // Remove tudo que não é dígito
+            value = value.substring(0, 8); // Limita a 8 dígitos
+
+            if (value.length > 5) {
+                value = value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+            } else if (value.length > 0) {
+                value = value.replace(/^(\d{0,5})$/, '$1');
+            }
+            event.target.value = value;
+        });
+
+
+        // Simulação de envio do formulário
+        document.getElementById('associadoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Validação final do CPF antes de "enviar"
+            const cpfMainInput = document.getElementById('cpf');
+            const cpfMainError = document.getElementById('cpfError');
+            if (cpfMainInput.value && !isValidCPF(cpfMainInput.value)) {
+                cpfMainError.classList.remove('hidden');
+                cpfMainInput.classList.add('border-red-500');
+                return; // Impede o envio se o CPF principal for inválido
+            }
+
+            if (isMenorCheckbox.checked) {
+                const cpfRespInput = document.getElementById('cpfResponsavel');
+                const cpfRespError = document.getElementById('cpfResponsavelError');
+                if (cpfRespInput.value && !isValidCPF(cpfRespInput.value)) {
+                    cpfRespError.classList.remove('hidden');
+                    cpfRespInput.classList.add('border-red-500');
+                    return; // Impede o envio se o CPF do responsável for inválido
+                }
+            }
+
+
+            // Coleta os dados do formulário
+            const formData = new FormData(event.target);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+
+            console.log("Dados do formulário para envio (simulado):", data);
+            alert("Formulário enviado com sucesso! (Simulação)\nVerifique o console para os dados.");
+
+            // Aqui você integraria com o seu back-end (Cloud Function, etc.)
+            // fetch('/api/submit-form', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data),
+            // })
+            // .then(response => response.json())
+            // .then(result => {
+            //     console.log('Sucesso:', result);
+            //     alert('Formulário enviado com sucesso! Um PDF foi enviado para o seu email.');
+            //     // Opcional: Redirecionar ou mostrar mensagem de sucesso
+            // })
+            // .catch(error => {
+            //     console.error('Erro:', error);
+            //     alert('Ocorreu um erro ao enviar o formulário. Tente novamente.');
+            // });
+        });
+    </script>
+</body>
+</html>
